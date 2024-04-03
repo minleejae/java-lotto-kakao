@@ -2,7 +2,7 @@ package controller;
 
 import generator.RandomNumberGenerator;
 import model.LottoGame;
-import model.LottoRank;
+import model.LottoResult;
 import model.Lottos;
 import model.WinningLotto;
 import view.LottoGameView;
@@ -30,10 +30,9 @@ public class LottoGameController {
 
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        List<LottoRank> lottoRanks = lottoGame.calculateResult(winningLotto);
+        LottoResult lottoResult = lottoGame.calculateResult(winningLotto);
 
-        lottoGameView.displayStatistics(lottoGame.calculateStatistics(lottoRanks));
-
-        lottoGameView.displayProfit(lottoGame.calculateProfit(lottoRanks));
+        lottoGameView.displayStatistics(lottoResult.calculateStatistics());
+        lottoGameView.displayProfit(lottoResult.calculateProfit());
     }
 }

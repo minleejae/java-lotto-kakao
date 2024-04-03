@@ -47,8 +47,8 @@ public class LottoTest {
         LottoNumber bonusNumber = new LottoNumber(7);
 
         WinningLotto winningLotto = new WinningLotto(inputLotto, bonusNumber);
-        List<LottoRank> lottoRanks = lottoGame.calculateResult(winningLotto);
+        LottoResult lottoResult = lottoGame.calculateResult(winningLotto);
 
-        Assertions.assertEquals(LottoRank.FIRST, lottoRanks.get(0));
+        Assertions.assertEquals(LottoRank.FIRST, lottoResult.getLottoRanks().get(0));
     }
 }
