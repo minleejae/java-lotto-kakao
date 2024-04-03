@@ -22,7 +22,7 @@ public class LottoGameView {
 
         int count = lottoRanks.getOrDefault(lottoRank, 0);
         System.out.println(
-                lottoRank.getMatchCount() + "개 일치" + (lottoRank.isMatchBonus() ? ", 보너스 볼 일치" : "")
+                lottoRank.getMatchCount() + "개 일치" + (lottoRank == LottoRank.SECOND ? ", 보너스 볼 일치" : "")
                         + "(" + lottoRank.getPrize() + "원) - " + count + "개");
     }
 

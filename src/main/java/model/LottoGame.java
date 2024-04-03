@@ -10,8 +10,4 @@ public class LottoGame {
     public LottoResult calculateResult(WinningLotto winningLotto) {
         return new LottoResult(this.lottos.calculateResult(winningLotto));
     }
-
-    public Lottos getLottos() {
-        return lottos;
-    }
 }

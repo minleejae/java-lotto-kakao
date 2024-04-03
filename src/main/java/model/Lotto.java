@@ -27,10 +27,6 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public static Lotto fromLottoNumberList(List<LottoNumber> lottoNumbers) {
-        return new Lotto(lottoNumbers);
-    }
-
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != 6) {
             throw new IllegalArgumentException("로또 숫자가 6개가 아닙니다.");
