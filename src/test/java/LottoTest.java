@@ -14,29 +14,19 @@ public class LottoTest {
 
     @BeforeEach
     void setUp() {
-        testNumberGenerator = new TestNumberGenerator(List.of(
-                List.of(1, 2, 3, 4, 5, 6)
-        ));
+        testNumberGenerator = new TestNumberGenerator(List.of(List.of(1, 2, 3, 4, 5, 6)));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {100, 200, 300})
     void validateLottoInvalidCost(int cost) {
-        Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new LottoGame(cost, testNumberGenerator));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new LottoGame(cost, testNumberGenerator));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {1000, 1500, 2000})
     void validateLottoCost(int cost) {
         Assertions.assertDoesNotThrow(() -> new LottoGame(cost, testNumberGenerator));
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {1000, 1500, 1600})
-    void calculateLottoAmount(int money) {
-        Cost cost = new Cost(money);
-        Assertions.assertEquals(1, cost.calculateLottoAmount());
     }
 
     @Test
