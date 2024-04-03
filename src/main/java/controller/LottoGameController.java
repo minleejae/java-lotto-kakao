@@ -1,3 +1,11 @@
+package controller;
+
+import generator.RandomNumberGenerator;
+import model.LottoGame;
+import model.LottoRank;
+import model.Lottos;
+import view.LottoGameView;
+
 import java.util.List;
 
 public class LottoGameController {

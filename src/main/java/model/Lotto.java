@@ -1,3 +1,7 @@
+package model;
+
+import generator.NumberGenerator;
+
 import java.util.List;
 
 public class Lotto {

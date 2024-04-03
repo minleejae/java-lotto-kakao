@@ -1,3 +1,9 @@
+package view;
+
+import model.Lotto;
+import model.LottoRank;
+import model.Lottos;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;

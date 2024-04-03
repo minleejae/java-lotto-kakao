@@ -1,3 +1,5 @@
+package model;
+
 public class Cost {
 
     private static final int MINIMUM_PRICE = 1000;

@@ -1,3 +1,6 @@
+import controller.LottoGameController;
+import view.LottoGameView;
+
 public class LottoGameApplication {
 
     public static void main(String[] args) {

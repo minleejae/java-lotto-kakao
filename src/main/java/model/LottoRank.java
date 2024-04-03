@@ -1,3 +1,5 @@
+package model;
+
 public enum LottoRank {
     FIRST(1, 6, false, 2000000000),
     SECOND(2, 5, true, 30000000),
