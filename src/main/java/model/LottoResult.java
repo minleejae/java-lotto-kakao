@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
+    private static final int INITIAL_COUNT = 0;
+    private static final int COUNT_INCREMENT = 1;
     private final List<LottoRank> lottoRanks;
     private final Cost cost;
 
@@ -16,7 +18,7 @@ public class LottoResult {
     public Map<LottoRank, Integer> calculateStatistics() {
         Map<LottoRank, Integer> statistics = new HashMap<>();
         for (LottoRank lottoRank : lottoRanks) {
-            statistics.put(lottoRank, statistics.getOrDefault(lottoRank, 0) + 1);
+            statistics.put(lottoRank, statistics.getOrDefault(lottoRank, INITIAL_COUNT) + COUNT_INCREMENT);
         }
         return statistics;
     }
