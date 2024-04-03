@@ -4,11 +4,7 @@ import model.Lotto;
 import model.LottoRank;
 import model.Lottos;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoGameView {
@@ -17,6 +13,17 @@ public class LottoGameView {
 
     public LottoGameView() {
         sc = new Scanner(System.in);
+    }
+
+    private static void displayStatistic(Map<LottoRank, Integer> lottoRanks, LottoRank lottoRank) {
+        if (lottoRank == LottoRank.FAIL) {
+            return;
+        }
+
+        int count = lottoRanks.getOrDefault(lottoRank, 0);
+        System.out.println(
+                lottoRank.getMatchCount() + "개 일치" + (lottoRank.isMatchBonus() ? ", 보너스 볼 일치" : "")
+                        + "(" + lottoRank.getPrize() + "원) - " + count + "개");
     }
 
     public int requestCost() {
@@ -47,10 +54,9 @@ public class LottoGameView {
         String input = sc.nextLine();
 
         try {
-            // TODO: 1부터 45까지 중복되지 않은 수 있는지 확인
             return Arrays.stream(input.split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
         } catch (NumberFormatException e) {
             System.out.println("[ERROR] 숫자를 입력해야 합니다.");
             return requestWinningNumbers();
@@ -80,17 +86,6 @@ public class LottoGameView {
         for (LottoRank lottoRank : ranks) {
             displayStatistic(lottoRanks, lottoRank);
         }
-    }
-
-    private static void displayStatistic(Map<LottoRank, Integer> lottoRanks, LottoRank lottoRank) {
-        if (lottoRank == LottoRank.FAIL) {
-            return;
-        }
-
-        int count = lottoRanks.getOrDefault(lottoRank, 0);
-        System.out.println(
-            lottoRank.getMatchCount() + "개 일치" + (lottoRank.isMatchBonus() ? ", 보너스 볼 일치" : "")
-                + "(" + lottoRank.getPrize() + "원) - " + count + "개");
     }
 
     public void displayProfit(Double profit) {

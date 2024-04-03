@@ -22,8 +22,7 @@ public class LottoGame {
         return cost.calculateLottoAmount();
     }
 
-    // TODO: Test 코드 작성
-    public List<LottoRank> calculateResult(List<Integer> winnerNumbers, int bonusNumber) {
+    public List<LottoRank> calculateResult(List<LottoNumber> winnerNumbers, LottoNumber bonusNumber) {
         List<LottoRank> lottoRanks = new ArrayList<>();
 
         for (Lotto lotto : lottos.getLottos()) {
@@ -48,7 +47,7 @@ public class LottoGame {
 
     public Double calculateProfit(List<LottoRank> lottoRanks) {
         return lottoRanks.stream()
-            .mapToDouble(LottoRank::getPrize)
-            .sum() / cost.getSpent();
+                .mapToDouble(LottoRank::getPrize)
+                .sum() / cost.getSpent();
     }
 }

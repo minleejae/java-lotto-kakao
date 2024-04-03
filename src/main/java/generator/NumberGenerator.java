@@ -1,8 +1,10 @@
 package generator;
 
+import model.LottoNumber;
+
 import java.util.List;
 
 public interface NumberGenerator {
 
-    List<Integer> generateNumbers();
+    List<LottoNumber> generateNumbers();
 }
