@@ -15,24 +15,44 @@ public class LottoGameController {
     }
 
     public void playGame() {
-        Cost cost = new Cost(lottoGameView.requestCost());
+        Cost cost = requestCost();
+        Lottos lottos = generateLottos(cost);
+        displayLottos(lottos, cost);
+
+        WinningLotto winningLotto = requestWinningLotto();
+        LottoResult lottoResult = calculateResult(lottos, winningLotto);
+
+        displayResult(lottoResult, cost);
+    }
+
+    private Cost requestCost() {
+        return new Cost(lottoGameView.requestCost());
+    }
+
+    private Lottos generateLottos(Cost cost) {
         RandomNumberGenerator numberGenerator = new RandomNumberGenerator();
-
         int amounts = cost.calculateLottoAmount();
-        Lottos lottos = new Lottos(amounts, numberGenerator);
+        return new Lottos(amounts, numberGenerator);
+    }
 
+    private void displayLottos(Lottos lottos, Cost cost) {
+        int amounts = cost.calculateLottoAmount();
         lottoGameView.displayLottoAmount(amounts);
         lottoGameView.displayLottos(lottos);
+    }
 
-        LottoGame lottoGame = new LottoGame(lottos);
-
+    private WinningLotto requestWinningLotto() {
         List<Integer> winningNumbers = lottoGameView.requestWinningNumbers();
         int bonusNumber = lottoGameView.requestBonusNumber();
+        return new WinningLotto(winningNumbers, bonusNumber);
+    }
 
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+    private LottoResult calculateResult(Lottos lottos, WinningLotto winningLotto) {
+        LottoGame lottoGame = new LottoGame(lottos);
+        return lottoGame.calculateResult(winningLotto);
+    }
 
-        LottoResult lottoResult = lottoGame.calculateResult(winningLotto);
-
+    private void displayResult(LottoResult lottoResult, Cost cost) {
         lottoGameView.displayStatistics(lottoResult.calculateStatistics());
         lottoGameView.displayProfit(lottoResult.calculateProfit(cost));
     }
