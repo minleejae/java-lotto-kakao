@@ -7,13 +7,13 @@ public class Cost {
     private final int cost;
 
     public Cost(int cost) {
-        this.cost = cost;
         validate(cost);
+        this.cost = cost;
     }
 
     private void validate(int cost) {
         if (cost < MINIMUM_PRICE) {
-            throw new IllegalArgumentException("로또 금액이 부족합니다.");
+            throw new IllegalArgumentException("로또 금액이 부족합니다. cost: " + cost);
         }
     }
 
