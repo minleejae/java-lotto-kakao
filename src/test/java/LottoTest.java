@@ -1,14 +1,16 @@
-import model.*;
-import org.junit.jupiter.api.Assertions;
+import model.Lotto;
+import model.LottoNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class LottoTest {
-    private static final int ONE = 1;
-    TestNumberGenerator testNumberGenerator;
+import static org.junit.jupiter.api.Assertions.*;
+
+class LottoTest {
+
+    private TestNumberGenerator testNumberGenerator;
 
     @BeforeEach
     void setUp() {
@@ -16,16 +18,40 @@ public class LottoTest {
     }
 
     @Test
-    void calculateResult() {
-        Lottos lottos = new Lottos(ONE, testNumberGenerator);
-        LottoGame lottoGame = new LottoGame(lottos);
+    void lottoCreationWithNumberGeneratorTest() {
+        Lotto lotto = new Lotto(testNumberGenerator);
+        assertNotNull(lotto);
+        assertEquals(6, lotto.getNumbers().size());
+    }
 
-        Lotto inputLotto = Lotto.fromNumberList(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber bonusNumber = new LottoNumber(7);
+    @Test
+    void lottoCreationFromNumberListTest() {
+        Lotto lotto = Lotto.fromNumberList(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertNotNull(lotto);
+        assertEquals(6, lotto.getNumbers().size());
+    }
 
-        WinningLotto winningLotto = new WinningLotto(inputLotto, bonusNumber);
-        LottoResult lottoResult = lottoGame.calculateResult(winningLotto);
+    @Test
+    void validateLottoNumbersWithInvalidSizeTest() {
+        assertThrows(IllegalArgumentException.class, () -> Lotto.fromNumberList(Arrays.asList(1, 2, 3, 4, 5)));
+    }
 
-        Assertions.assertEquals(LottoRank.FIRST, lottoResult.getLottoRanks().get(0));
+    @Test
+    void validateLottoNumbersWithDuplicateNumbersTest() {
+        assertThrows(IllegalArgumentException.class, () -> Lotto.fromNumberList(Arrays.asList(1, 2, 3, 4, 5, 5)));
+    }
+
+    @Test
+    void getMatchCountTest() {
+        Lotto firstLotto = Lotto.fromNumberList(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto secondLotto = Lotto.fromNumberList(Arrays.asList(1, 2, 3, 7, 8, 9));
+        assertEquals(3, firstLotto.getMatchCount(secondLotto));
+    }
+
+    @Test
+    void containsTest() {
+        Lotto lotto = Lotto.fromNumberList(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertTrue(lotto.contains(new LottoNumber(1)));
+        assertFalse(lotto.contains(new LottoNumber(7)));
     }
 }
