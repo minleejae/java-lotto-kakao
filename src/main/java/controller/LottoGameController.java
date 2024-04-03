@@ -1,10 +1,7 @@
 package controller;
 
 import generator.RandomNumberGenerator;
-import model.LottoGame;
-import model.LottoResult;
-import model.Lottos;
-import model.WinningLotto;
+import model.*;
 import view.LottoGameView;
 
 import java.util.List;
@@ -18,12 +15,16 @@ public class LottoGameController {
     }
 
     public void playGame() {
-        LottoGame lottoGame = new LottoGame(lottoGameView.requestCost(), new RandomNumberGenerator());
+        Cost cost = new Cost(lottoGameView.requestCost());
+        RandomNumberGenerator numberGenerator = new RandomNumberGenerator();
 
-        lottoGameView.displayLottoAmount(lottoGame.calculateLottoAmount());
+        int amounts = cost.calculateLottoAmount();
+        Lottos lottos = new Lottos(amounts, numberGenerator);
 
-        Lottos lottos = lottoGame.getLottos();
+        lottoGameView.displayLottoAmount(amounts);
         lottoGameView.displayLottos(lottos);
+
+        LottoGame lottoGame = new LottoGame(lottos);
 
         List<Integer> winningNumbers = lottoGameView.requestWinningNumbers();
         int bonusNumber = lottoGameView.requestBonusNumber();
@@ -33,6 +34,6 @@ public class LottoGameController {
         LottoResult lottoResult = lottoGame.calculateResult(winningLotto);
 
         lottoGameView.displayStatistics(lottoResult.calculateStatistics());
-        lottoGameView.displayProfit(lottoResult.calculateProfit());
+        lottoGameView.displayProfit(lottoResult.calculateProfit(cost));
     }
 }

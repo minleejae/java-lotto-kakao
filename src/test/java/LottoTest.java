@@ -2,14 +2,12 @@ import model.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class LottoTest {
-
+    private static final int ONE = 1;
     TestNumberGenerator testNumberGenerator;
 
     @BeforeEach
@@ -17,21 +15,10 @@ public class LottoTest {
         testNumberGenerator = new TestNumberGenerator(List.of(List.of(1, 2, 3, 4, 5, 6)));
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = {100, 200, 300})
-    void validateLottoInvalidCost(int cost) {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new LottoGame(cost, testNumberGenerator));
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {1000, 1500, 2000})
-    void validateLottoCost(int cost) {
-        Assertions.assertDoesNotThrow(() -> new LottoGame(cost, testNumberGenerator));
-    }
-
     @Test
     void calculateResult() {
-        LottoGame lottoGame = new LottoGame(1000, testNumberGenerator);
+        Lottos lottos = new Lottos(ONE, testNumberGenerator);
+        LottoGame lottoGame = new LottoGame(lottos);
 
         Lotto inputLotto = Lotto.fromNumberList(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(7);

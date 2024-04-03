@@ -8,11 +8,9 @@ public class LottoResult {
     private static final int INITIAL_COUNT = 0;
     private static final int COUNT_INCREMENT = 1;
     private final List<LottoRank> lottoRanks;
-    private final Cost cost;
 
-    public LottoResult(List<LottoRank> lottoRanks, Cost cost) {
+    public LottoResult(List<LottoRank> lottoRanks) {
         this.lottoRanks = lottoRanks;
-        this.cost = cost;
     }
 
     public Map<LottoRank, Integer> calculateStatistics() {
@@ -23,7 +21,7 @@ public class LottoResult {
         return statistics;
     }
 
-    public Double calculateProfit() {
+    public Double calculateProfit(Cost cost) {
         return lottoRanks.stream()
                 .mapToDouble(LottoRank::getPrize)
                 .sum() / cost.getSpent();
