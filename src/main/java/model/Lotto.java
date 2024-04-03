@@ -2,8 +2,10 @@ package model;
 
 import generator.NumberGenerator;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -13,9 +15,20 @@ public class Lotto {
         this(numberGenerator.generateNumbers());
     }
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    private Lotto(List<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
         numbers = lottoNumbers;
+    }
+
+    public static Lotto fromNumberList(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        return new Lotto(lottoNumbers);
+    }
+
+    public static Lotto fromLottoNumberList(List<LottoNumber> lottoNumbers) {
+        return new Lotto(lottoNumbers);
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -29,14 +42,20 @@ public class Lotto {
         }
     }
 
-    public int getMatchCount(List<LottoNumber> winnerNumbers) {
+    public int getMatchCount(Lotto otherLotto) {
+        List<LottoNumber> otherNumbers = otherLotto.getNumbers();
+
         return (int) numbers.stream()
-                .filter(winnerNumbers::contains)
+                .filter(otherNumbers::contains)
                 .count();
     }
 
     public boolean contains(LottoNumber number) {
         return numbers.contains(number);
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return Collections.unmodifiableList(numbers);
     }
 
     @Override

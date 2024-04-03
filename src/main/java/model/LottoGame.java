@@ -2,7 +2,6 @@ package model;
 
 import generator.NumberGenerator;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,23 +21,16 @@ public class LottoGame {
         return cost.calculateLottoAmount();
     }
 
-    public List<LottoRank> calculateResult(List<LottoNumber> winnerNumbers, LottoNumber bonusNumber) {
-        List<LottoRank> lottoRanks = new ArrayList<>();
-
-        for (Lotto lotto : lottos.getLottos()) {
-            int matchCount = lotto.getMatchCount(winnerNumbers);
-            boolean matchBonus = lotto.contains(bonusNumber);
-            lottoRanks.add(LottoRank.of(matchCount, matchBonus));
-        }
-        return lottoRanks;
-    }
-
     public Map<LottoRank, Integer> calculateStatistics(List<LottoRank> lottoRanks) {
         Map<LottoRank, Integer> statistics = new HashMap<>();
         for (LottoRank lottoRank : lottoRanks) {
             statistics.put(lottoRank, statistics.getOrDefault(lottoRank, 0) + 1);
         }
         return statistics;
+    }
+
+    public List<LottoRank> calculateResult(WinningLotto winningLotto) {
+        return this.lottos.calculateResult(winningLotto);
     }
 
     public Lottos getLottos() {

@@ -2,13 +2,12 @@ package controller;
 
 import generator.RandomNumberGenerator;
 import model.LottoGame;
-import model.LottoNumber;
 import model.LottoRank;
 import model.Lottos;
+import model.WinningLotto;
 import view.LottoGameView;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoGameController {
 
@@ -29,7 +28,10 @@ public class LottoGameController {
         List<Integer> winningNumbers = lottoGameView.requestWinningNumbers();
         int bonusNumber = lottoGameView.requestBonusNumber();
 
-        List<LottoRank> lottoRanks = lottoGame.calculateResult(winningNumbers.stream().map(LottoNumber::new).collect(Collectors.toList()), new LottoNumber(bonusNumber));
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+
+        List<LottoRank> lottoRanks = lottoGame.calculateResult(winningLotto);
+
         lottoGameView.displayStatistics(lottoGame.calculateStatistics(lottoRanks));
 
         lottoGameView.displayProfit(lottoGame.calculateProfit(lottoRanks));
