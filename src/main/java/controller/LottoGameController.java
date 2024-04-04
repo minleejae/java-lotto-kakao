@@ -19,8 +19,11 @@ public class LottoGameController {
 
     public void playGame() {
         Cost cost = requestCost();
-        Lottos lottos = generateLottos(cost);
-        displayLottos(lottos, cost);
+        int manualLottoAmount = lottoGameView.requestManualLottoAmount();
+        List<List<Integer>> manualLottoNumbers = lottoGameView.requestManualLottoNumbers(manualLottoAmount);
+
+        Lottos lottos = generateLottos(cost, manualLottoAmount, manualLottoNumbers);
+        displayLottos(lottos, cost, manualLottoAmount);
 
         WinningLotto winningLotto = requestWinningLotto();
         LottoResult lottoResult = calculateResult(lottos, winningLotto);
@@ -32,15 +35,15 @@ public class LottoGameController {
         return new Cost(lottoGameView.requestCost());
     }
 
-    private Lottos generateLottos(Cost cost) {
+    private Lottos generateLottos(Cost cost, int manualLottoAmount, List<List<Integer>> manualLottoNumbers) {
+        int autoLottoAmount = cost.calculateAutoLottoAmount(manualLottoAmount);
         RandomLottoGenerator numberGenerator = new RandomLottoGenerator();
-        int amounts = cost.calculateLottoAmount();
-        return Lottos.of(amounts, numberGenerator);
+        return Lottos.of(manualLottoNumbers, autoLottoAmount, numberGenerator);
     }
 
-    private void displayLottos(Lottos lottos, Cost cost) {
-        int amounts = cost.calculateLottoAmount();
-        lottoGameView.displayLottoAmount(amounts);
+    private void displayLottos(Lottos lottos, Cost cost, int manualLottoAmount) {
+        int autoLottoAmount = cost.calculateAutoLottoAmount(manualLottoAmount);
+        lottoGameView.displayLottoAmount(manualLottoAmount, autoLottoAmount);
         lottoGameView.displayLottos(lottos);
     }
 

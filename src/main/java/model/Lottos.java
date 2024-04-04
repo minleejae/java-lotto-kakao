@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -16,10 +17,13 @@ public class Lottos {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public static Lottos of(int amount, LottoGenerator lottoGenerator) {
-        List<Lotto> lottos = IntStream.range(0, amount)
-                .mapToObj(i -> lottoGenerator.generateLotto())
-                .collect(Collectors.toList());
+    public static Lottos of(List<List<Integer>> manualLottoNumbers, int autoLottoAmount, LottoGenerator lottoGenerator) {
+        List<Lotto> lottos = Stream.concat(
+                manualLottoNumbers.stream()
+                        .map(Lotto::fromNumberList),
+                IntStream.range(0, autoLottoAmount)
+                        .mapToObj(i -> lottoGenerator.generateLotto())
+        ).collect(Collectors.toList());
 
         return new Lottos(lottos);
     }

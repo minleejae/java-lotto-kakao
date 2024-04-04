@@ -24,4 +24,14 @@ public class Cost {
     public int getSpent() {
         return calculateLottoAmount() * LOTTO_PRICE;
     }
+
+    public void checkManualLottoAmount(int manualLottoAmount) {
+        if (cost < manualLottoAmount * LOTTO_PRICE) {
+            throw new IllegalArgumentException("수동 로또를 사기에 금액이 부족합니다. cost: " + cost);
+        }
+    }
+
+    public int calculateAutoLottoAmount(int manualLottoAmount) {
+        return calculateLottoAmount() - manualLottoAmount;
+    }
 }

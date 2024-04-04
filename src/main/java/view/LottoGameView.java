@@ -7,6 +7,7 @@ import model.Lottos;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoGameView {
 
@@ -39,8 +40,20 @@ public class LottoGameView {
         }
     }
 
-    public void displayLottoAmount(int lottoAmount) {
-        System.out.println(lottoAmount + "개를 구매했습니다.");
+    public int requestManualLottoAmount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        String input = sc.nextLine();
+
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            System.out.println("[ERROR] 숫자를 입력해야 합니다.");
+            return requestCost();
+        }
+    }
+
+    public void displayLottoAmount(int manualLottoAmount, int autoLottoAmount) {
+        System.out.println("수동으로 " + manualLottoAmount + "장, 자동으로 " + autoLottoAmount + "개를 구매했습니다.");
     }
 
     public void displayLottos(Lottos lottos) {
@@ -58,6 +71,17 @@ public class LottoGameView {
 
     public List<Integer> requestWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return requestLottoNumbers();
+    }
+
+    public List<List<Integer>> requestManualLottoNumbers(int amount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        return IntStream.range(0, amount)
+                .mapToObj(i -> requestLottoNumbers())
+                .collect(Collectors.toList());
+    }
+
+    public List<Integer> requestLottoNumbers() {
         String input = sc.nextLine();
 
         try {
@@ -66,7 +90,7 @@ public class LottoGameView {
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
             System.out.println("[ERROR] 숫자를 입력해야 합니다.");
-            return requestWinningNumbers();
+            return requestLottoNumbers();
         }
     }
 

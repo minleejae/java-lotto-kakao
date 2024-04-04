@@ -13,15 +13,29 @@ public class CostTest {
     }
 
     @Test
-    public void testCost_ConstructorThrowsExceptionForInvalidCost() {
+    public void cost_ConstructorThrowsExceptionForInvalidCost() {
         int invalidCost = 999;
         Assertions.assertThrows(IllegalArgumentException.class, () -> new Cost(invalidCost), "최소 금액 미만일 때 예외가 발생해야 합니다.");
     }
 
     @Test
-    public void testGetSpent_ReturnsCorrectSpentAmount() {
+    public void getSpent_ReturnsCorrectSpentAmount() {
         Cost cost = new Cost(3000);
         int expectedSpent = 3000;
         Assertions.assertEquals(expectedSpent, cost.getSpent(), "지출한 금액이 올바르게 계산되어야 합니다.");
+    }
+
+    @Test
+    public void checkManualAmountInvalidInput() {
+        Cost cost = new Cost(3000);
+        int invalidAmount = 4;
+        Assertions.assertThrows(IllegalArgumentException.class, () -> cost.checkManualLottoAmount(invalidAmount));
+    }
+
+    @Test
+    public void checkManualAmountValidInput() {
+        Cost cost = new Cost(3000);
+        int invalidAmount = 3;
+        Assertions.assertDoesNotThrow(() -> cost.checkManualLottoAmount(invalidAmount));
     }
 }
