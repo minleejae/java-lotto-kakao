@@ -3,17 +3,17 @@ package model;
 import java.util.List;
 
 public class WinningLotto {
-    private final Lotto inputLotto;
+    private final Lotto lotto;
     private final LottoNumber bonusLottoNumber;
 
     public WinningLotto(List<Integer> winningLottoNumbers, int bonusNumber) {
         this(Lotto.fromNumberList(winningLottoNumbers), LottoNumber.valueOf(bonusNumber));
     }
 
-    public WinningLotto(Lotto inputLotto, LottoNumber bonusNumber) {
-        validationWinningLotto(inputLotto, bonusNumber);
-        this.inputLotto = inputLotto;
-        this.bonusLottoNumber = bonusNumber;
+    public WinningLotto(Lotto lotto, LottoNumber bonusLottoNumber) {
+        validationWinningLotto(lotto, bonusLottoNumber);
+        this.lotto = lotto;
+        this.bonusLottoNumber = bonusLottoNumber;
     }
 
     private void validationWinningLotto(Lotto inputLotto, LottoNumber bonusNumber) {
@@ -29,7 +29,7 @@ public class WinningLotto {
     }
 
     private int getMatchCount(Lotto lotto) {
-        return inputLotto.getMatchCount(lotto);
+        return this.lotto.getMatchCount(lotto);
     }
 
     private boolean checkLottoContainsBonusNumber(Lotto lotto) {
