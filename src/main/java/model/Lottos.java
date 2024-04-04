@@ -3,23 +3,25 @@ package model;
 import generator.LottoGenerator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(int amount, LottoGenerator lottoGenerator) {
-        lottos = new ArrayList<>();
-
-        for (int i = 0; i < amount; i++) {
-            lottos.add(lottoGenerator.generateLotto());
-        }
+    private Lottos(List<Lotto> lottos) {
+        this.lottos = new ArrayList<>(lottos);
     }
 
-    public Lottos(Lottos other) {
-        lottos = new ArrayList<>(other.lottos);
+    public static Lottos of(int amount, LottoGenerator lottoGenerator) {
+        List<Lotto> lottos = IntStream.range(0, amount)
+                .mapToObj(i -> lottoGenerator.generateLotto())
+                .collect(Collectors.toList());
+
+        return new Lottos(lottos);
     }
 
     public LottoResult calculateResult(WinningLotto winningLotto) {
@@ -31,6 +33,6 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return new Lottos(this).lottos;
+        return Collections.unmodifiableList(lottos);
     }
 }

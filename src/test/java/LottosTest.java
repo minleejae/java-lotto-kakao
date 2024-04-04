@@ -18,7 +18,7 @@ public class LottosTest {
 
     @Test
     void calculateResult() {
-        Lottos lottos = new Lottos(ONE, testNumberGenerator);
+        Lottos lottos = Lottos.of(ONE, testNumberGenerator);
 
         Lotto inputLotto = Lotto.fromNumberList(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = LottoNumber.valueOf(7);

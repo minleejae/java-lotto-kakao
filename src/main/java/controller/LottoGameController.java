@@ -35,7 +35,7 @@ public class LottoGameController {
     private Lottos generateLottos(Cost cost) {
         RandomLottoGenerator numberGenerator = new RandomLottoGenerator();
         int amounts = cost.calculateLottoAmount();
-        return new Lottos(amounts, numberGenerator);
+        return Lottos.of(amounts, numberGenerator);
     }
 
     private void displayLottos(Lottos lottos, Cost cost) {
