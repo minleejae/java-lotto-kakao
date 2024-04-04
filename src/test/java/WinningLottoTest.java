@@ -15,7 +15,7 @@ public class WinningLottoTest {
         Lotto lotto = Lotto.fromNumberList(
                 List.of(1, 2, 3, 4, 5, 6)
         );
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
         assertDoesNotThrow(() -> new WinningLotto(lotto, bonusNumber));
     }
 
@@ -24,7 +24,7 @@ public class WinningLottoTest {
         Lotto lotto = Lotto.fromNumberList(
                 List.of(1, 2, 3, 4, 5, 6)
         );
-        LottoNumber bonusNumber = new LottoNumber(6);
+        LottoNumber bonusNumber = LottoNumber.valueOf(6);
         assertThrows(IllegalArgumentException.class, () -> new WinningLotto(lotto, bonusNumber));
     }
 
@@ -33,7 +33,7 @@ public class WinningLottoTest {
         Lotto lotto = Lotto.fromNumberList(
                 List.of(1, 2, 3, 4, 5, 6)
         );
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
 
         WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
         LottoRank lottoRank = winningLotto.makeLottoRank(lotto);

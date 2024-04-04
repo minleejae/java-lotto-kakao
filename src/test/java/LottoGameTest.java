@@ -22,7 +22,7 @@ public class LottoGameTest {
         LottoGame lottoGame = new LottoGame(lottos);
 
         Lotto inputLotto = Lotto.fromNumberList(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
 
         WinningLotto winningLotto = new WinningLotto(inputLotto, bonusNumber);
         LottoResult lottoResult = lottoGame.calculateResult(winningLotto);

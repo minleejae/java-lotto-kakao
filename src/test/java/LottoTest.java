@@ -43,7 +43,7 @@ class LottoTest {
     @Test
     void containsTest() {
         Lotto lotto = Lotto.fromNumberList(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertTrue(lotto.contains(new LottoNumber(1)));
-        assertFalse(lotto.contains(new LottoNumber(7)));
+        assertTrue(lotto.contains(LottoNumber.valueOf(1)));
+        assertFalse(lotto.contains(LottoNumber.valueOf(7)));
     }
 }

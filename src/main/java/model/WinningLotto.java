@@ -7,7 +7,7 @@ public class WinningLotto {
     private final LottoNumber bonusLottoNumber;
 
     public WinningLotto(List<Integer> winningLottoNumbers, int bonusNumber) {
-        this(Lotto.fromNumberList(winningLottoNumbers), new LottoNumber(bonusNumber));
+        this(Lotto.fromNumberList(winningLottoNumbers), LottoNumber.valueOf(bonusNumber));
     }
 
     public WinningLotto(Lotto inputLotto, LottoNumber bonusNumber) {
@@ -17,7 +17,7 @@ public class WinningLotto {
     }
 
     private void validationWinningLotto(Lotto inputLotto, LottoNumber bonusNumber) {
-        if (inputLotto.contains(bonusNumber)){
+        if (inputLotto.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 숫자는 입력되지 않은 로또 숫자만 가능합니다.");
         }
     }
