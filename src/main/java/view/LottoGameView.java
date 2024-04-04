@@ -16,12 +16,12 @@ public class LottoGameView {
         sc = new Scanner(System.in);
     }
 
-    private static void displayStatistic(Map<LottoRank, Integer> lottoRanks, LottoRank lottoRank) {
+    private static void displayStatistic(Map<LottoRank, Long> lottoRanks, LottoRank lottoRank) {
         if (lottoRank == LottoRank.FAIL) {
             return;
         }
 
-        int count = lottoRanks.getOrDefault(lottoRank, 0);
+        Long count = lottoRanks.getOrDefault(lottoRank, 0L);
         System.out.println(
                 lottoRank.getMatchCount() + "개 일치" + (lottoRank == LottoRank.SECOND ? ", 보너스 볼 일치" : "")
                         + "(" + lottoRank.getPrize() + "원) - " + count + "개");
@@ -83,7 +83,7 @@ public class LottoGameView {
         }
     }
 
-    public void displayStatistics(Map<LottoRank, Integer> lottoRanks) {
+    public void displayStatistics(Map<LottoRank, Long> lottoRanks) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
