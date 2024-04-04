@@ -1,7 +1,10 @@
 package controller;
 
 import generator.RandomLottoGenerator;
-import model.*;
+import model.Cost;
+import model.LottoResult;
+import model.Lottos;
+import model.WinningLotto;
 import view.LottoGameView;
 
 import java.util.List;
@@ -48,8 +51,7 @@ public class LottoGameController {
     }
 
     private LottoResult calculateResult(Lottos lottos, WinningLotto winningLotto) {
-        LottoGame lottoGame = new LottoGame(lottos);
-        return lottoGame.calculateResult(winningLotto);
+        return lottos.calculateResult(winningLotto);
     }
 
     private void displayResult(LottoResult lottoResult, Cost cost) {

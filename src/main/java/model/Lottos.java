@@ -22,10 +22,12 @@ public class Lottos {
         lottos = new ArrayList<>(other.lottos);
     }
 
-    public List<LottoRank> calculateResult(WinningLotto winningLotto) {
-        return lottos.stream()
+    public LottoResult calculateResult(WinningLotto winningLotto) {
+        List<LottoRank> rottoRanks = lottos.stream()
                 .map(winningLotto::makeLottoRank)
                 .collect(Collectors.toList());
+
+        return new LottoResult(rottoRanks);
     }
 
     public List<Lotto> getLottos() {
