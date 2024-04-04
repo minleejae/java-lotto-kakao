@@ -9,11 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoGameTest {
     private static final int ONE = 1;
-    private TestNumberGenerator testNumberGenerator;
+    private TestLottoGenerator testNumberGenerator;
 
     @BeforeEach
     void setUp() {
-        testNumberGenerator = new TestNumberGenerator(List.of(List.of(1, 2, 3, 4, 5, 6)));
+        testNumberGenerator = new TestLottoGenerator(List.of(List.of(1, 2, 3, 4, 5, 6)));
     }
 
     @Test

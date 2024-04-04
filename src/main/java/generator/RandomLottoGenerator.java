@@ -1,23 +1,24 @@
 package generator;
 
-import model.LottoNumber;
+import model.Lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RandomNumberGenerator implements NumberGenerator {
+public class RandomLottoGenerator implements LottoGenerator {
 
-    public List<LottoNumber> generateNumbers() {
-        List<LottoNumber> numbers = new ArrayList<>();
+    public Lotto generateLotto() {
+        List<Integer> numbers = new ArrayList<>();
 
         for (int i = 1; i <= 45; i++) {
-            numbers.add(new LottoNumber(i));
+            numbers.add(i);
         }
         Collections.shuffle(numbers);
 
         numbers = numbers.subList(0, 6);
         Collections.sort(numbers);
-        return numbers;
+
+        return Lotto.fromNumberList(numbers);
     }
 }

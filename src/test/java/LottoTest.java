@@ -1,6 +1,5 @@
 import model.Lotto;
 import model.LottoNumber;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -10,16 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTest {
 
-    private TestNumberGenerator testNumberGenerator;
-
-    @BeforeEach
-    void setUp() {
-        testNumberGenerator = new TestNumberGenerator(List.of(List.of(1, 2, 3, 4, 5, 6)));
-    }
-
     @Test
     void lottoCreationWithNumberGeneratorTest() {
-        Lotto lotto = new Lotto(testNumberGenerator);
+        Lotto lotto = Lotto.fromNumberList(List.of(1, 2, 3, 4, 5, 6));
         assertNotNull(lotto);
         assertEquals(6, lotto.getNumbers().size());
     }

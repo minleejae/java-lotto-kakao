@@ -1,7 +1,5 @@
 package model;
 
-import generator.NumberGenerator;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -10,10 +8,6 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private final List<LottoNumber> numbers;
-
-    public Lotto(NumberGenerator numberGenerator) {
-        this(numberGenerator.generateNumbers());
-    }
 
     private Lotto(List<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
