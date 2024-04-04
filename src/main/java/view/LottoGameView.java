@@ -1,6 +1,7 @@
 package view;
 
 import model.Lotto;
+import model.LottoNumber;
 import model.LottoRank;
 import model.Lottos;
 
@@ -44,7 +45,13 @@ public class LottoGameView {
 
     public void displayLottos(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
-            System.out.println(lotto.toString());
+            String numbers = lotto.getNumbers()
+                    .stream()
+                    .map(LottoNumber::getLottoNumber)
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(",", "[", "]"));
+
+            System.out.println(numbers);
         }
         System.out.println();
     }

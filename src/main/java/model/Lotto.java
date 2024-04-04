@@ -34,10 +34,8 @@ public class Lotto {
     }
 
     public int getMatchCount(Lotto otherLotto) {
-        List<LottoNumber> otherNumbers = otherLotto.getNumbers();
-
         return (int) numbers.stream()
-                .filter(otherNumbers::contains)
+                .filter(otherLotto.numbers::contains)
                 .count();
     }
 
@@ -47,13 +45,5 @@ public class Lotto {
 
     public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
-    }
-
-    @Override
-    public String toString() {
-        return numbers.stream()
-                .map(LottoNumber::getLottoNumber)
-                .map(String::valueOf)
-                .collect(Collectors.joining(",", "[", "]"));
     }
 }
