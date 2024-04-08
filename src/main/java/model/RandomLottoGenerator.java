@@ -1,6 +1,7 @@
-package generator;
+package model;
 
 import model.Lotto;
+import model.LottoGenerator;
 
 import java.util.ArrayList;
 import java.util.Collections;

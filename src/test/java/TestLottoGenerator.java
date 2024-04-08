@@ -1,4 +1,4 @@
-import generator.LottoGenerator;
+import model.LottoGenerator;
 import model.Lotto;
 
 import java.util.List;
