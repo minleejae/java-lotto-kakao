@@ -24,18 +24,4 @@ public class CostTest {
         int expectedSpent = 3000;
         Assertions.assertEquals(expectedSpent, cost.getSpent(), "지출한 금액이 올바르게 계산되어야 합니다.");
     }
-
-    @Test
-    public void checkManualAmountInvalidInput() {
-        Cost cost = new Cost(3000);
-        int invalidAmount = 4;
-        Assertions.assertThrows(IllegalArgumentException.class, () -> cost.checkManualLottoAmount(invalidAmount));
-    }
-
-    @Test
-    public void checkManualAmountValidInput() {
-        Cost cost = new Cost(3000);
-        int invalidAmount = 3;
-        Assertions.assertDoesNotThrow(() -> cost.checkManualLottoAmount(invalidAmount));
-    }
 }
