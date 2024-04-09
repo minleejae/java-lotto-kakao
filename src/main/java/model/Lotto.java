@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    public static final int VALID_LOTTO_NUMBERS_SIZE = 6;
+    private static final int VALID_LOTTO_NUMBERS_SIZE = 6;
     private final List<LottoNumber> numbers;
 
     private Lotto(List<LottoNumber> lottoNumbers) {
@@ -15,7 +15,7 @@ public class Lotto {
         numbers = lottoNumbers;
     }
 
-    public static Lotto fromNumberList(List<Integer> numbers) {
+    public static Lotto from(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());

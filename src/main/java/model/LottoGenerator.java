@@ -23,7 +23,7 @@ public class LottoGenerator {
         numbers = numbers.subList(0, LOTTO_NUMBERS_COUNT);
         Collections.sort(numbers);
 
-        return Lotto.fromNumberList(numbers);
+        return Lotto.from(numbers);
     }
 
     public Lottos generateManualAndAutoLottos(List<List<Integer>> manualLottoNumbers, int autoLottoAmount) {
@@ -46,7 +46,7 @@ public class LottoGenerator {
 
     public Lottos generateManualLottos(List<List<Integer>> manualLottoNumbers) {
         List<Lotto> lottos = manualLottoNumbers.stream()
-                .map(Lotto::fromNumberList)
+                .map(Lotto::from)
                 .collect(Collectors.toList());
         return new Lottos(lottos);
     }

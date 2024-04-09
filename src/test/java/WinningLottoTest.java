@@ -12,7 +12,7 @@ public class WinningLottoTest {
 
     @Test
     public void constructorWinningLottoTest() {
-        Lotto lotto = Lotto.fromNumberList(
+        Lotto lotto = Lotto.from(
                 List.of(1, 2, 3, 4, 5, 6)
         );
         LottoNumber bonusNumber = LottoNumber.valueOf(7);
@@ -21,7 +21,7 @@ public class WinningLottoTest {
 
     @Test
     public void constructorWinningLotto_thrownErrorTest() {
-        Lotto lotto = Lotto.fromNumberList(
+        Lotto lotto = Lotto.from(
                 List.of(1, 2, 3, 4, 5, 6)
         );
         LottoNumber bonusNumber = LottoNumber.valueOf(6);
@@ -30,7 +30,7 @@ public class WinningLottoTest {
 
     @Test
     public void makeLottoRankTest() {
-        Lotto lotto = Lotto.fromNumberList(
+        Lotto lotto = Lotto.from(
                 List.of(1, 2, 3, 4, 5, 6)
         );
         LottoNumber bonusNumber = LottoNumber.valueOf(7);

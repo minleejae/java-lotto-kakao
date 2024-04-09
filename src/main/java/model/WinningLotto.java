@@ -7,7 +7,7 @@ public class WinningLotto {
     private final LottoNumber bonusLottoNumber;
 
     public WinningLotto(List<Integer> winningLottoNumbers, int bonusNumber) {
-        this(Lotto.fromNumberList(winningLottoNumbers), LottoNumber.valueOf(bonusNumber));
+        this(Lotto.from(winningLottoNumbers), LottoNumber.valueOf(bonusNumber));
     }
 
     public WinningLotto(Lotto lotto, LottoNumber bonusLottoNumber) {
