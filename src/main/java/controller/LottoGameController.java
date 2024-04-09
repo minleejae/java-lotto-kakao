@@ -1,10 +1,6 @@
 package controller;
 
-import model.RandomLottoGenerator;
-import model.Cost;
-import model.LottoResult;
-import model.Lottos;
-import model.WinningLotto;
+import model.*;
 import view.LottoGameView;
 
 import java.util.List;
@@ -37,8 +33,8 @@ public class LottoGameController {
 
     private Lottos generateLottos(Cost cost, int manualLottoAmount, List<List<Integer>> manualLottoNumbers) {
         int autoLottoAmount = cost.calculateAutoLottoAmount(manualLottoAmount);
-        RandomLottoGenerator lottoGenerator = new RandomLottoGenerator();
-        return Lottos.of(manualLottoNumbers, autoLottoAmount, lottoGenerator);
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        return lottoGenerator.generateManualAndAutoLottos(manualLottoNumbers, autoLottoAmount);
     }
 
     private void displayLottos(Lottos lottos, Cost cost, int manualLottoAmount) {
