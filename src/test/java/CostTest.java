@@ -25,11 +25,12 @@ public class CostTest {
         Assertions.assertEquals(expectedSpent, cost.getSpent(), "지출한 금액이 올바르게 계산되어야 합니다.");
     }
 
-    @Test
-    public void calculateAutoLottoAmount() {
-        Cost cost = new Cost(3000);
+    @ParameterizedTest
+    @ValueSource(ints = {3000, 3500, 4000, 5000})
+    public void calculateAutoLottoAmount(int money) {
+        Cost cost = new Cost(money);
         int manualLottoAmount = 3;
-        int autoLottoAmount = cost.calculateAutoLottoAmount(3);
+        int autoLottoAmount = cost.calculateAutoLottoAmount(manualLottoAmount);
         int totalLottoAmount = cost.calculateLottoAmount();
 
         Assertions.assertEquals(autoLottoAmount, totalLottoAmount - manualLottoAmount);
