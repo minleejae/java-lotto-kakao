@@ -1,18 +1,18 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    public static final int LOTTO_NUMBER_LOWER_BOUND = 1;
-    public static final int LOTTO_NUMBER_UPPER_BOUND = 45;
-    private static final List<LottoNumber> CACHE = new ArrayList<>();
+    private static final int LOTTO_NUMBER_LOWER_BOUND = 1;
+    private static final int LOTTO_NUMBER_UPPER_BOUND = 45;
+    private static final List<LottoNumber> LOTTO_NUMBERS;
 
     static {
-        for (int i = LOTTO_NUMBER_LOWER_BOUND; i <= LOTTO_NUMBER_UPPER_BOUND; i++) {
-            CACHE.add(new LottoNumber(i));
-        }
+        LOTTO_NUMBERS = IntStream.rangeClosed(LOTTO_NUMBER_LOWER_BOUND, LOTTO_NUMBER_UPPER_BOUND)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     private final int lottoNumber;
@@ -23,12 +23,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber valueOf(final int number) {
         validateLottoNumber(number);
-        LottoNumber lottoNumber = CACHE.get(number - 1);
-
-        if (Objects.isNull(lottoNumber)) {
-            lottoNumber = new LottoNumber(number);
-        }
-        return lottoNumber;
+        return LOTTO_NUMBERS.get(number - 1);
     }
 
     private static void validateLottoNumber(int lottoNumber) {
