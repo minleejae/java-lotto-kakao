@@ -17,9 +17,10 @@ public class LottoResult {
     }
 
     public Double calculateProfit(Cost cost) {
-        return lottoRanks.stream()
+        double sum = lottoRanks.stream()
                 .mapToDouble(LottoRank::getPrize)
-                .sum() / cost.getSpent();
+                .sum();
+        return sum / cost.getSpent();
     }
 
     public List<LottoRank> getLottoRanks() {
