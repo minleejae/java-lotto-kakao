@@ -17,17 +17,6 @@ public class LottoGameView {
         sc = new Scanner(System.in);
     }
 
-    private static void displayStatistic(Map<LottoRank, Long> lottoRanks, LottoRank lottoRank) {
-        if (lottoRank == LottoRank.FAIL) {
-            return;
-        }
-
-        Long count = lottoRanks.getOrDefault(lottoRank, 0L);
-        System.out.println(
-                lottoRank.getMatchCount() + "개 일치" + (lottoRank == LottoRank.SECOND ? ", 보너스 볼 일치" : "")
-                        + "(" + lottoRank.getPrize() + "원) - " + count + "개");
-    }
-
     public int requestCost() {
         System.out.println("구입금액을 입력해 주세요.");
         String input = sc.nextLine();
@@ -115,8 +104,18 @@ public class LottoGameView {
         Collections.reverse(ranks);
 
         for (LottoRank lottoRank : ranks) {
-            displayStatistic(lottoRanks, lottoRank);
+            displayRankStatistic(lottoRank, lottoRanks.getOrDefault(lottoRank, 0L));
         }
+    }
+
+    private static void displayRankStatistic(LottoRank lottoRank, Long count) {
+        if (lottoRank == LottoRank.FAIL) {
+            return;
+        }
+
+        System.out.println(
+                lottoRank.getMatchCount() + "개 일치" + (lottoRank == LottoRank.SECOND ? ", 보너스 볼 일치" : "")
+                        + "(" + lottoRank.getPrize() + "원) - " + count + "개");
     }
 
     public void displayProfit(Double profit) {
