@@ -19,10 +19,9 @@ public class LottoGameController {
         List<List<Integer>> manualLottoNumbers = lottoGameView.requestManualLottoNumbers(manualLottoAmount);
 
         Lottos lottos = generateLottos(cost, manualLottoAmount, manualLottoNumbers);
-        displayLottos(lottos, cost, manualLottoAmount);
 
         WinningLotto winningLotto = requestWinningLotto();
-        LottoResult lottoResult = calculateResult(lottos, winningLotto);
+        LottoResult lottoResult = lottos.calculateResult(winningLotto);
 
         displayResult(lottoResult, cost);
     }
@@ -36,24 +35,18 @@ public class LottoGameController {
 
         Lottos manualLottos = LottoGenerator.generateManualLottos(manualLottoNumbers);
         Lottos autoLottos = LottoGenerator.generateAutoLottos(autoLottoAmount);
+        Lottos lottos = manualLottos.merge(autoLottos);
 
-        return manualLottos.merge(autoLottos);
-    }
-
-    private void displayLottos(Lottos lottos, Cost cost, int manualLottoAmount) {
-        int autoLottoAmount = cost.calculateAutoLottoAmount(manualLottoAmount);
         lottoGameView.displayLottoAmount(manualLottoAmount, autoLottoAmount);
         lottoGameView.displayLottos(lottos);
+
+        return lottos;
     }
 
     private WinningLotto requestWinningLotto() {
         List<Integer> winningNumbers = lottoGameView.requestWinningNumbers();
         int bonusNumber = lottoGameView.requestBonusNumber();
         return new WinningLotto(winningNumbers, bonusNumber);
-    }
-
-    private LottoResult calculateResult(Lottos lottos, WinningLotto winningLotto) {
-        return lottos.calculateResult(winningLotto);
     }
 
     private void displayResult(LottoResult lottoResult, Cost cost) {
