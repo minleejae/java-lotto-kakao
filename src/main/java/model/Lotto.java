@@ -10,7 +10,7 @@ public class Lotto {
     private static final int VALID_LOTTO_NUMBERS_SIZE = 6;
     private final List<LottoNumber> numbers;
 
-    private Lotto(List<LottoNumber> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
         numbers = lottoNumbers;
     }

@@ -21,6 +21,13 @@ public class Lottos {
         return new LottoResult(rottoRanks);
     }
 
+    public Lottos merge(Lottos other) {
+        List<Lotto> mergedLottos = new ArrayList<>();
+        mergedLottos.addAll(lottos);
+        mergedLottos.addAll(other.lottos);
+        return new Lottos(mergedLottos);
+    }
+
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }

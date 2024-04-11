@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final int LOTTO_NUMBER_LOWER_BOUND = 1;
     private static final int LOTTO_NUMBER_UPPER_BOUND = 45;
-    private static final List<LottoNumber> LOTTO_NUMBERS;
+    public static final List<LottoNumber> LOTTO_NUMBERS;
 
     static {
         LOTTO_NUMBERS = IntStream.rangeClosed(LOTTO_NUMBER_LOWER_BOUND, LOTTO_NUMBER_UPPER_BOUND)

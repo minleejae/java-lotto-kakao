@@ -33,8 +33,11 @@ public class LottoGameController {
 
     private Lottos generateLottos(Cost cost, int manualLottoAmount, List<List<Integer>> manualLottoNumbers) {
         int autoLottoAmount = cost.calculateAutoLottoAmount(manualLottoAmount);
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        return lottoGenerator.generateManualAndAutoLottos(manualLottoNumbers, autoLottoAmount);
+
+        Lottos manualLottos = LottoGenerator.generateManualLottos(manualLottoNumbers);
+        Lottos autoLottos = LottoGenerator.generateAutoLottos(autoLottoAmount);
+
+        return manualLottos.merge(autoLottos);
     }
 
     private void displayLottos(Lottos lottos, Cost cost, int manualLottoAmount) {
