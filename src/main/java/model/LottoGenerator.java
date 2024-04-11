@@ -14,7 +14,15 @@ public class LottoGenerator {
         throw new AssertionError("LottoGenerator class cannot be instantiated");
     }
 
-    public static Lotto generateLotto() {
+    public static Lottos generateAutoLottos(int autoLottoAmount) {
+        List<Lotto> lottos = IntStream.range(0, autoLottoAmount)
+                .mapToObj(it -> generateLotto())
+                .collect(Collectors.toList());
+
+        return new Lottos(lottos);
+    }
+
+    private static Lotto generateLotto() {
         List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumber.LOTTO_NUMBERS);
         Collections.shuffle(lottoNumbers);
 
@@ -22,14 +30,6 @@ public class LottoGenerator {
         Collections.sort(lottoNumbers);
 
         return new Lotto(lottoNumbers);
-    }
-
-    public static Lottos generateAutoLottos(int autoLottoAmount) {
-        List<Lotto> lottos = IntStream.range(0, autoLottoAmount)
-                .mapToObj(it -> generateLotto())
-                .collect(Collectors.toList());
-
-        return new Lottos(lottos);
     }
 
     public static Lottos generateManualLottos(List<List<Integer>> manualLottoNumbers) {
