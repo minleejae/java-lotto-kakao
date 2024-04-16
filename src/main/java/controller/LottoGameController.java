@@ -1,9 +1,13 @@
 package controller;
 
+import dto.LottoRankDto;
 import model.*;
 import view.LottoGameView;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoGameController {
 
@@ -48,7 +52,13 @@ public class LottoGameController {
     }
 
     private void displayResult(LottoResult lottoResult, Cost cost) {
-        lottoGameView.displayStatistics(lottoResult.calculateStatistics());
+        Map<LottoRank, Long> lottoRankLongMap = lottoResult.calculateStatistics();
+
+        List<LottoRankDto> lottoRankDto = Arrays.stream(LottoRank.values())
+                .map(it -> LottoRankDto.from(it, lottoRankLongMap.getOrDefault(it, 0L)))
+                .collect(Collectors.toList());
+
+        lottoGameView.displayStatistics(lottoRankDto);
         lottoGameView.displayProfit(lottoResult.calculateProfit(cost));
     }
 }

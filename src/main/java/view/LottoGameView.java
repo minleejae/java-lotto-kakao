@@ -1,11 +1,13 @@
 package view;
 
+import dto.LottoRankDto;
 import model.Lotto;
 import model.LottoNumber;
-import model.LottoRank;
 import model.Lottos;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -96,26 +98,25 @@ public class LottoGameView {
         }
     }
 
-    public void displayStatistics(Map<LottoRank, Long> lottoRanks) {
+    public void displayStatistics(List<LottoRankDto> statistics) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        List<LottoRank> ranks = Arrays.asList(LottoRank.values());
-        Collections.reverse(ranks);
+        statistics.sort((o1, o2) -> Integer.compare(o2.getMatchCount(), o1.getMatchCount()));
 
-        for (LottoRank lottoRank : ranks) {
-            displayRankStatistic(lottoRank, lottoRanks.getOrDefault(lottoRank, 0L));
+        for (LottoRankDto stat : statistics) {
+            displayRankStatistic(stat);
         }
     }
 
-    private static void displayRankStatistic(LottoRank lottoRank, Long count) {
-        if (lottoRank == LottoRank.FAIL) {
+    private static void displayRankStatistic(LottoRankDto lottoRankDto) {
+        if (lottoRankDto.getMatchCount() == 0) {
             return;
         }
 
         System.out.println(
-                lottoRank.getMatchCount() + "개 일치" + (lottoRank == LottoRank.SECOND ? ", 보너스 볼 일치" : "")
-                        + "(" + lottoRank.getPrize() + "원) - " + count + "개");
+                lottoRankDto.getMatchCount() + "개 일치" + (lottoRankDto.isBonusMatch() ? ", 보너스 볼 일치" : "") +
+                        "(" + lottoRankDto.getPrize() + "원) - " + lottoRankDto.getAmount() + "개");
     }
 
     public void displayProfit(Double profit) {
